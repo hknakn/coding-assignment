@@ -1,0 +1,168 @@
+.movie-wrapper {
+  padding: 10px;
+  margin-bottom: 2rem;
+}
+
+.movie-card {
+  position: relative;
+  color: #fff;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+    .overlay {
+      opacity: 0.9;
+    }
+
+    .info_panel {
+      opacity: 1;
+    }
+  }
+}
+
+.card-body {
+  position: relative;
+  padding: 0;
+}
+
+.movie-poster {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.overlay,
+.info_panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.overlay {
+  background-color: #000;
+}
+
+.info_panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+  background: transparent;
+}
+
+.movie-title {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.year {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.overview {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  max-height: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  margin-bottom: 15px;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.btn-star {
+  font-size: 1.5rem;
+  color: #e50914;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.btn-watch-later,
+.btn-trailer {
+  width: 80%;
+  padding: 8px 0;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-watch-later {
+  background-color: #4caf50;
+  color: white;
+
+  &.active {
+    background-color: #45a049;
+  }
+
+  &:hover {
+    background-color: #45a049;
+  }
+}
+
+.btn-trailer {
+  background-color: #008cba;
+  color: white;
+
+  &:hover {
+    background-color: #007b9e;
+  }
+}
+
+@media (max-width: 768px) {
+  .movie-card {
+    &:hover {
+      transform: none;
+    }
+  }
+
+  .info_panel {
+    padding: 10px;
+  }
+
+  .movie-title {
+    font-size: 1rem;
+  }
+
+  .year {
+    font-size: 0.8rem;
+  }
+
+  .overview {
+    font-size: 0.7rem;
+    -webkit-line-clamp: 3;
+  }
+
+  .btn-watch-later,
+  .btn-trailer {
+    font-size: 0.8rem;
+    padding: 6px 0;
+  }
+}

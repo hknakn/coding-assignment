@@ -1,34 +1,39 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
-import { configureStore } from '@reduxjs/toolkit'
-import { setupListeners } from '@reduxjs/toolkit/dist/query'
-import moviesSlice from '../data/moviesSlice'
-import starredSlice from '../data/starredSlice'
-import watchLaterSlice from '../data/watchLaterSlice'
+import React from "react";
+import { render, act } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { configureStore } from "@reduxjs/toolkit";
+import moviesReducer from "../data/moviesSlice";
+import starredReducer from "../data/starredSlice";
+import watchLaterReducer from "../data/watchLaterSlice";
 
-export function renderWithProviders(
+export async function renderWithProviders(
   ui,
   {
     preloadedState = {},
     store = configureStore({
-      reducer: { 
-        movies: moviesSlice.reducer, 
-        starred: starredSlice.reducer,
-        watchLater: watchLaterSlice.reducer
+      reducer: {
+        movies: moviesReducer,
+        starred: starredReducer,
+        watchLater: watchLaterReducer,
       },
       preloadedState,
     }),
     ...renderOptions
   } = {}
 ) {
-
-  setupListeners(store.dispatch)
-
   function Wrapper({ children }) {
-    return <Provider store={store}><BrowserRouter>{children}</BrowserRouter></Provider>;
+    return (
+      <Provider store={store}>
+        <BrowserRouter>{children}</BrowserRouter>
+      </Provider>
+    );
   }
 
-  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
+  let result;
+  await act(async () => {
+    result = render(ui, { wrapper: Wrapper, ...renderOptions });
+  });
+
+  return { store, ...result };
 }
