@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Movie } from "../types/movie";
 
-interface MoviesState {
+export interface MoviesState {
     movies: Movie[];
     fetchStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;

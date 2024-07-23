@@ -1,7 +1,7 @@
-import moviesReducer, { fetchMovies, appendMovies } from '../data/moviesSlice';
+import moviesReducer, { fetchMovies, appendMovies, MoviesState } from '../data/moviesSlice';
 
 describe('moviesSlice', () => {
-    const initialState = {
+    const initialState: MoviesState = {
         movies: [],
         fetchStatus: 'idle',
         error: null,
@@ -33,9 +33,13 @@ describe('moviesSlice', () => {
     });
 
     it('should handle appendMovies.fulfilled', () => {
-        const initialStateWithMovies = {
+        const initialStateWithMovies: MoviesState & { movies: { id: number, title: string }[] }
+            = {
             ...initialState,
-            movies: [{ id: 1, title: 'Existing Movie' }],
+            movies: [{
+                id: 1, title: 'Existing Movie',
+                overview: 'Overview', release_date: '2021-01-01', vote_average: 5, vote_count: 1, popularity: 1, poster_path: 'path'
+            }],
         };
         const payload = [{ id: 2, title: 'New Movie' }];
         const action = { type: appendMovies.fulfilled.type, payload };
